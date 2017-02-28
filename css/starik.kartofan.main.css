@@ -1,0 +1,335 @@
+
+/*TODO: что-то делать с курсорами на планшете*/
+* {
+    cursor: url("../images/mainCursor.png"), auto !important;
+    margin: 0px;
+    padding: 0px;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #e6e6fa;
+}
+
+.hide {
+    display: none !important;
+}
+
+.show {
+    display: inline;
+}
+
+/*Main Panels*/
+
+#kf_mainLayout {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+#kf_mainLayout > div {
+    position: absolute;
+}
+
+#kf_mapsContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#kf_bottomMenu {
+    background-color: black;
+}
+
+
+
+
+
+
+
+
+.maps {
+    /*position: absolute !important;*/
+    /*padding: 0px;*/
+}
+
+.activemap .active-selector {
+    background: #0079a1;
+    z-index: 999999 !important;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+}
+
+.coordscorrection .coordscorrection-selector {
+    background: red;
+    z-index: 999999 !important;
+    position: absolute;
+    width: 2px;
+    height: 2px;
+}
+
+.tour {
+    min-width: 300px;
+}
+
+.popover-title {
+    text-align: center;
+    font: 22px bold;
+}
+
+/*Shown cursor when resize maps containers in stage*/
+.ui-resizable-e, .ui-resizable-s, .ui-resizable-se {
+    cursor: move !important;
+    z-index: 999999 !important;
+    background-color: grey;
+}
+
+[data-icon]:before {
+  vertical-align: middle;
+  font-size: 16pt;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  vertical-align: middle;
+  font-size: 16pt;
+}
+
+/*Disable Foundation tabels otherwise arcticmodal is broken*/
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+.accordion {
+    min-width: 240px;
+}
+
+.accordion .content {
+    padding: 0px;
+}
+
+.accordion .content .row {
+    padding: 15px 0px;
+}
+
+.accordion .content .row:hover {
+    background-color: #708090;
+}
+
+.accordion dd>a {
+    background-color: #7adeff;
+}
+
+.accordion dd>a:hover {
+    background-color: #7adeff;
+}
+
+
+.arcticmodal-container_i2 { 
+    /*width: 100%;*/
+    padding: 0px;
+}
+
+.arcticmodal-container { 
+    z-index: 19999; 
+}
+
+
+.foundationForm {
+    background-color: white;
+    padding: 5px;
+    min-width: 240px;
+}
+
+.foundationForm input,
+.foundationForm select {
+    margin: 0px;
+}
+
+.foundationForm input[data-invalid],
+.foundationForm select[data-invalid],
+.foundationForm textarea[data-invalid] {
+    background-color: red;
+}
+
+.foundationForm a.button{
+    margin: 6px 0px;
+}
+
+.foundationForm .row>span{
+    padding: 10px;
+}
+
+.foundationForm .panel img.selected {
+    background-color: #0079a1;
+}
+
+.foundationForm .panel {
+    margin: 0px;    
+}
+
+.foundationForm .panel .button,
+.foundationForm .nomargin {
+    margin: 0px 1px !important;    
+}
+
+.foundationForm .panel .columns {
+    padding: 0px;    
+}
+
+#formEditMarker_tagsPanel {
+    padding: 0px !important;
+}
+
+.formInputTag:after {
+    margin-left: 5px;
+    background-color: white;
+    color: black;
+    padding: 1px 5px;
+    content: 'x';
+}
+
+.xdsoft_datetimepicker {
+    z-index: 1000000000;
+}
+
+.foundationForm input[type="checkbox"] {
+    content: "";
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+}
+.foundationForm input[type="checkbox"]:checked {
+    background-position: 0 -32px;
+}
+
+
+
+
+
+
+
+
+#kf_bottomMenu .row {
+    max-width: 100%;
+    width: 100%;
+}
+
+#kf_bottomMenu h6, #kf_bottomMenu h6 span {
+    color: #727272;
+    margin: 0px;
+    line-height: 1;
+}
+
+.mainColumn {
+    background-color: white;
+}
+
+
+
+#updatesInfo, #hotkeysInfo, #disqus_thread {
+    background-color: white;
+    padding: 15px;
+    z-index: -10;
+}
+
+#hotkeysInfo .button {
+    margin-bottom: 0px;
+}
+
+#disqus_thread {
+    width: 600px;
+}
+
+#exportView {
+    width: 100%;
+    height: 100%;
+}
+
+#cutterView {
+/*    width: 1600px;
+    height: 1600px;*/
+    z-index: 10000000000;
+    position: absolute;
+    top: 145px;
+    left: 0px;
+}
+
+#formRawJSON {
+    width: 560px;
+}
+
+#formRawJSON textarea {
+    height: 500px;
+}
+
+
+
+/*Position ans size changed by JS onresize*/
+#fastNotes {
+    position: absolute;
+}
+
+#fastNotes_textarea {
+    width: 100%;
+    height: 100%;
+}
+
+#markersTable {
+    background-color: white;
+    padding: 15px;
+    width: 100%;
+}
+
+
+
+.coordsCorrection_rightMarker {
+    border-top: 16px solid rgba(66, 170, 255, 1);
+    border-left: 16px solid rgba(0,0,0,0);
+    border-right: 16px solid rgba(0,0,0,0);
+    border-bottom: 16px solid rgba(0,0,0,0);
+}
+
+.coordsCorrection_wrongMarker {
+    border-top: 16px solid rgba(247, 84, 255, 1);
+    border-left: 16px solid rgba(0,0,0,0);
+    border-right: 16px solid rgba(0,0,0,0);
+    border-bottom: 16px solid rgba(0,0,0,0);
+}
+
+
+
+
+
+#markerDescription {
+    background-color: white;
+    padding: 10px;
+}
+
+
+
+/*Markers Table*/
+.dataTables_wrapper, .dataTables_paginate.paging_foundation {
+    margin: 0;
+}
+
+.dataTables_wrapper .button {
+    margin: 0 15px;
+}
+
+tr.row_selected {
+    background-color: grey !important;
+}

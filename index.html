@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<!--html(manifest="offline/cache.appcache")-->
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="shortcut icon" href="images/favicon_256x256.png" type="image/png">
+    <!-- Top JS-->
+    <script src="js_vendor/jquery.js"></script>
+    <script src="js_vendor/jquery-ui.js"></script>
+    <script src="js_vendor/leaflet-src.js"></script>
+    <script src="js_vendor/FileSaver.js"></script>
+    <script src="js_vendor/base64.js "></script>
+    <script src="js_vendor/pouchdb.js"></script>
+    <script src="js_vendor/jquery.noty.js"></script>
+    <script src="js_vendor/jquery.noty.bottomRight.js"></script>
+    <script src="js_vendor/bootstrap-tagsinput.js"></script>
+    <script src="js_vendor/hammer.js"></script>
+    <script src="js_vendor/jquery.hammer.js"></script>
+    <script src="js_vendor/leaflet.measure.js"></script>
+    <script src="js_vendor/jquery.arcticmodal-0.3.min.js"></script>
+    <script src="js_vendor/modernizr.js"></script>
+    <script src="js_vendor/shortcut.js"></script>
+    <script src="js_vendor/leaflet.markercluster-src.js"></script>
+    <script src="js_vendor/moment-with-langs.js"></script>
+    <script src="js_vendor/ckeditor/ckeditor.js"></script>
+    <script src="js_vendor/jquery.dataTables.min.js"></script>
+    <script src="js_vendor/jquery.datetimepicker.js"></script>
+    <script src="js_vendor/leaflet.label-src.js"></script>
+    <script src="js_vendor/dataTables.foundation.js"></script>
+    <!-- CSS    -->
+    <link href="css_vendor/leaflet.css" rel="stylesheet">
+    <link href="css_vendor/jquery-ui.css" rel="stylesheet">
+    <link href="css_vendor/leaflet.measure.css" rel="stylesheet">
+    <link href="css_vendor/jquery.arcticmodal-0.3.css" rel="stylesheet">
+    <link href="css_vendor/foundation.css" rel="stylesheet">
+    <link href="css_vendor/normalize.css" rel="stylesheet">
+    <link href="css_vendor/animate.css" rel="stylesheet">
+    <link href="css_vendor/MarkerCluster.Default.css" rel="stylesheet">
+    <link href="css_vendor/jquery.dataTables.css" rel="stylesheet">
+    <link href="css_vendor/jquery.datetimepicker.css" rel="stylesheet">
+    <link href="css_vendor/leaflet.label.css" rel="stylesheet">
+    <link href="css_vendor/dataTables.foundation.css" rel="stylesheet">
+    <link href="css_vendor/starik.kartofan.fonts.css" rel="stylesheet">
+    <link href="css/starik.kartofan.main.css" rel="stylesheet">
+    <!--script(src="top.js")-->
+    <!--link(href="vendor.css", rel="stylesheet")-->
+    <!--link(href="app.css", rel="stylesheet")-->
+  </head>
+  <body>
+    <!-- LOADER-->
+    <div id="kf_loader" style="font: 30px fantasy !important; text-align: center;">
+      <h1>Loading... about 2MB. Be patient it`s dev version.</h1>
+      <h1>Загружается... около 2Мб. Будьте терпеливы это же тестовая версия.</h1>
+    </div>
+    <div id="kf_mainLayout">
+      <div id="kf_topMenu">
+        <nav data-topbar data-options="is_hover: false" class="top-bar">
+          <ul class="title-area">
+            <li class="name">
+              <h1><a id="canvasDownload">Kartofan</a></h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a><span class="topMenuMenu">Menu</span></a></li>
+          </ul>
+          <section class="top-bar-section">
+            <ul class="left">
+              <li id="topMenuMapSetTour"><a class="topMenuMapSet"><span class="icon-map"></span></a></li>
+              <li id="topMenuStageSetTour"><a class="topMenuStageSet"><span class="icon-grid"></span></a></li>
+              <li id="topMenuMoveMoveTour"><a class="topMenuMoveMove"><span class="icon-aim"></span></a></li>
+              <li id="topMenuUtilsToggleFulscreenTour"><a class="topMenuUtilsToggleFulscreen"><span class="icon-arrows-out"></span></a></li>
+              <li id="topMenuUtilsToggleMeasuringTour"><a class="topMenuUtilsToggleMeasuring"><span class="icon-crop-streamline"></span></a></li>
+              <li><a class="topMenuSetCache"><span class="icon-picture-streamline-1"></span></a></li>
+              <!--li: a.topMenuStageExport Export Stage Like Image-->
+              <li><a class="topMenuMarkersAddMarker"><span class="icon-pin"></span></a></li>
+            </ul>
+            <ul class="right">
+              <li id="topMenuStageEditor" class="has-dropdown hide-for-small-only hide-for-medium-up hide-for-large-up hide-for-xlarge-up hide-for-xxlarge-up"><a><span class="topMenuStageEditor">Stage Editor</span></a>
+                <ul class="dropdown">
+                  <li><a class="topMenuStageEditorSaveView">Save View</a></li>
+                  <li><a class="topMenuStageEditorAddMap">Add Map To Stage</a></li>
+                  <li><a class="topMenuStageEditorRemoveMap">Remove Map From Stage</a></li>
+                  <li><a class="topMenuStageEditorEditControls">Edit Controls On Selected Map</a></li>
+                  <li><a class="topMenuStageEditorToggleBlockZoom">Toggle Blocking Zoom on Active Map</a></li>
+                </ul>
+              </li>
+              <li id="topMenuCoordsCorrection" class="has-dropdown hide-for-small-only hide-for-medium-up hide-for-large-up hide-for-xlarge-up hide-for-xxlarge-up"><a><span class="topMenuCoordsCorrection">Coords Correction</span></a>
+                <ul class="dropdown">
+                  <li><a class="topMenuCoordsCorrectionAddRight">Add Right Coord</a></li>
+                  <li><a class="topMenuCoordsCorrectionAddWrong">Add Wrong Coord</a></li>
+                  <li><a class="topMenuCoordsCorrectionRemoveMarkers">Remove Markers</a></li>
+                  <li><a class="topMenuCoordsCorrectionSaveCorrections">Save corrections</a></li>
+                  <li><a class="topMenuCoordsCorrectionDropCorrectionSelect">Drop Correction on Visible Maps</a></li>
+                  <li><a class="topMenuCoordsCorrectionClose">Close Menu</a></li>
+                </ul>
+              </li>
+              <li><a class="topMenuHelpTourMain button alert hide-for-small-only hide-for-medium-up hide-for-large-up hide-for-xlarge">TourMain</a></li>
+              <li class="divider"></li>
+              <li><a class="topMenuHelpUpdates button alert hide-for-small-only hide-for-medium-up hide-for-large-up hide-for-xlarge">Updates</a></li>
+              <li id="topMenuMenuTour" class="has-dropdown"><a><span class="topMenuMenu">Menu</span></a>
+                <ul class="dropdown">
+                  <li class="has-dropdown"><a class="topMenuMaps">Maps </a>
+                    <ul class="dropdown">
+                      <li><a class="topMenuMapSet">Set Map</a></li>
+                      <li><a class="topMenuMapEdit">Edit Map</a></li>
+                      <li><a class="topMenuMapExternal">Get External Map</a></li>
+                      <li><a class="topMenuMapSave">Save Map</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown"><a class="topMenuStages">Stages </a>
+                    <ul class="dropdown">
+                      <li><a class="topMenuStageSet">Set Stage</a></li>
+                      <li><a class="topMenuStageEdit">Edit Stage</a></li>
+                      <li><a class="topMenuStageExternal">Get External Stage</a></li>
+                      <li><a class="topMenuStageEditView">Edit This Stage View</a></li>
+                      <li><a class="topMenuStageSave">Save This Stage</a></li>
+                      <li><a class="topMenuStageExport">Export Stage Like Image</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown"><a class="topMenuMarkers">Markers </a>
+                    <ul class="dropdown">
+                      <li><a class="topMenuMarkersAddMarker">Add Marker</a></li>
+                      <li><a class="topMenuMarkersSaveFilter">Save Filter</a></li>
+                      <li><a class="topMenuMarkersLoadFilter">Load Filter</a></li>
+                      <li><a class="topMenuMarkersDeleteFilter">Delete Filter</a></li>
+                      <li><a class="topMenuMarkersDeleteReset">Reset Filter</a></li>
+                      <!--li: a.topMenuMarkersEdit Edit Markers-->
+                      <!--li: a.topMenuMarkersExternal Get External Markers-->
+                      <!--li: a.topMenuMarkersEditView Edit This Markers View-->
+                      <!--li: a.topMenuMarkersSave Save This Markers-->
+                      <li><a class="topMenuMarkersExport">Export Markers</a></li>
+                      <li><a class="topMenuMarkersExportAll">Export Markers All</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown"><a class="topMenuUtils">Utils</a>
+                    <ul class="dropdown">
+                      <li><a class="topMenuUtilsToggleFulscreen">Toggle Fullscreen Select Map</a></li>
+                      <li><a class="topMenuUtilsToggleMeasuring">Measuring</a></li>
+                      <li><a class="topMenuUtilsFastNotes">Fast Notes</a></li>
+                      <li><a class="topMenuUtilsCoordsCorrection">Coords Correction</a></li>
+                      <li><a class="topMenuUtilsMarkersTable">Editing Markers Table</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown"><a class="topMenuMove">Moves </a>
+                    <ul class="dropdown">
+                      <li><a class="topMenuMoveMove">Move To</a></li>
+                      <li><a class="topMenuMoveAdd">Add Move</a></li>
+                      <li><a class="topMenuMoveEdit">Edit Move</a></li>
+                    </ul>
+                  </li>
+                  <li id="topMenuOpt" class="has-dropdown"><a class="topMenuOpt">Settings</a>
+                    <ul class="dropdown">
+                      <li><a class="topMenuOptUpdate">Update Options From External Base</a></li>
+                      <li><a class="topMenuOptLang">Set Language </a></li>
+                      <li><a class="topMenuOptReset">Reset All Settings</a></li>
+                      <li class="divider"></li>
+                      <li><a class="topMenuOptHashChange">Addres Bar Coords Change</a></li>
+                      <li><a class="topMenuOptMapsSyncMoving">Maps Sync Moving</a></li>
+                      <li><a class="topMenuOptMapSyncZooming">Map Sync Zooming </a></li>
+                      <li><a class="topMenuOptMapCursorAllMapsVisible">Map Cursor On All Maps Visible </a></li>
+                      <li><a class="topMenuOptViewInfoPanelShowAlways">Info Panel Show Always </a></li>
+                      <li><a class="topMenuOptDbSyncIn">Db Sync In </a></li>
+                      <li><a class="topMenuOptDbSyncOut">Db Sync Out </a></li>
+                      <li><a class="topMenuOptGpsAutoStart">GPS Auto Start</a></li>
+                      <li><a class="topMenuOptSHowMarkers">Show Markers</a></li>
+                      <li><a class="topMenuOptSaveCorrections">Save Coords Corrections</a></li>
+                      <li class="divider"></li>
+                      <li><a class="topMenuSetCache">Map Cached Type</a></li>
+                      <li><a class="topMenuMapCachedService">Set Map Cached Service</a></li>
+                      <li><a class="topMenuMapDefaultCenterLatLng">Set Map Default Center LatLng </a></li>
+                      <li><a class="topMenuMapDefaultURL">Set Map Default URL</a></li>
+                      <li><a class="topMenuMainFeed">Set Main Feed</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown"><a class="topMenuJSON">JSON </a>
+                    <ul class="dropdown">
+                      <li><a class="topMenuJSONMaps">Get All External Maps</a></li>
+                      <li><a class="topMenuJSONStages">Get All External Stages</a></li>
+                      <li><a class="topMenuJSONMoves">Get All External Moves </a></li>
+                      <li><a class="topMenuJSONAll">Get All From JSON</a></li>
+                      <li><a class="topMenuJSONExport">Export All Data To JSON</a></li>
+                      <li><a class="topMenuJSONRawText">Get Data From Text</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown"><a class="topMenuGPS">GPS </a>
+                    <ul class="dropdown">
+                      <li><a class="topMenuGPSStart">GPS Start</a></li>
+                      <li><a class="topMenuGPSStop">GPS Stop</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown"><a class="topMenuHelp">Help </a>
+                    <ul class="dropdown">
+                      <li><a class="topMenuHelpComments">Add Comment On Site  </a></li>
+                      <li><a href="http://kartofan-blog.blogspot.com/" target="_blank" class="topMenuHelpBlog">Blog</a></li>
+                      <li><a href="http://kartofan.comuf.com/qa/" target="_blank" class="topMenuHelpFAQ">Site Questions And Answers</a></li>
+                      <li><a href="https://github.com/starikan/kartofan" target="_blank" class="topMenuHelpSource">Sources on GitHub</a></li>
+                      <li><a class="topMenuHelpHotkeys">Hotkeys List</a></li>
+                      <li><a class="topMenuHelpTourMain">TourMain</a></li>
+                      <li><a class="topMenuHelpUpdates">Updates</a></li>
+                      <li><a class="topMenuOptLang">Set Language</a></li>
+                      <li><a class="topMenuVersion">Version</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <li id="topMenuHelp" class="has-dropdown"><a class="icon-iconic-10 topMenuHelp"></a>
+                  <ul class="dropdown">
+                    <li><a class="topMenuHelpComments">Add Comment On Site   </a></li>
+                    <li><a href="http://kartofan-blog.blogspot.com/" target="_blank" class="topMenuHelpBlog">Blog</a></li>
+                    <!--li: a.topMenuHelpFAQ(href="http://kartofan.comuf.com/qa/", target="_blank") Site Questions And Answers-->
+                    <li><a href="https://github.com/starikan/kartofan" target="_blank" class="topMenuHelpSource">Sources on GitHub</a></li>
+                    <li><a class="topMenuHelpHotkeys">Hotkeys List</a></li>
+                    <li><a class="topMenuHelpTourMain">Tour Main  </a></li>
+                    <li><a class="topMenuHelpUpdates">Updates</a></li>
+                    <li><a class="topMenuOptLang">Set Language</a></li>
+                    <li><a class="topMenuVersion">Version</a></li>
+                  </ul>
+                </li>
+                <li id="topMenuPin"><a class="icon-iconic topMenu"></a></li>
+              </li>
+            </ul>
+          </section>
+        </nav>
+      </div>
+      <div id="kf_bottomMenu">
+        <div class="row">
+          <div class="columns hide-for-small-only medium-4">
+            <h6 class="infoMenuLatLng">Coords</h6>
+          </div>
+          <div class="columns small-6 medium-4 text-center">
+            <h6 class="infoMenuTime">Time</h6>
+          </div>
+          <div class="columns small-6 medium-4 text-right">
+            <h6 class="infoMenuVersion right">Version</h6>
+            <h6 class="right">|</h6>
+            <h6 class="infoMenuCache right">Cache</h6>
+          </div>
+        </div>
+      </div>
+      <div id="kf_leftMenu">1111111111111</div>
+      <div id="kf_rightMenu">2222222222222</div>
+      <div id="kf_leftPanel">33333333333333</div>
+      <div id="kf_rightPanel">3333333333333            </div>
+      <div id="kf_mapsContainer_correct">
+        <div id="kf_mapsContainer">
+          <!--Dynamicaly generate in Stage object-->
+        </div>
+      </div>
+    </div>
+    <div id="updatesInfo" class="hide"></div>
+    <div id="hotkeysInfo" class="hide"></div>
+    <div id="markerDescription" class="hide"></div>
+    <canvas id="exportView" class="hide"></canvas>
+    <canvas id="cutterView" class="hide"></canvas>
+    <!--a#canvasDownload-->
+    <div id="formRawJSON" class="foundationForm hide">
+      <div class="box-modal">
+        <form data-abide>
+          <div class="row">
+            <div class="small-11 columns small-centered">
+              <textarea class="formRawJSON_rawJSON"></textarea>
+            </div>
+          </div>
+          <div class="row center">
+            <div class="small-6 columns text-right"><a class="small button formRawJSON_submit">Send </a></div>
+            <div class="small-6 columns text-left"><a class="small button formRawJSON_cancel">Cancel </a></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="fastNotes" class="hide">
+      <textarea id="fastNotes_textarea"></textarea>
+    </div>
+    <div id="markersTable" class="hide">
+      <table id="markersTable_table">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Table Of Markers Column Selector-->
+    <div id="markersTable_columnsSelect" class="foundationForm hide">
+      <div class="box-modal">
+        <form data-abide>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix markersTable_columnsSelect_title">Title</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="markersTable_columnsSelect_title text-center">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix markersTable_columnsSelect_tags">Tags</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="markersTable_columnsSelect_tags text-center">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix markersTable_columnsSelect_icon">Icon</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="markersTable_columnsSelect_icon text-center">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix markersTable_columnsSelect_layer">Layer</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="markersTable_columnsSelect_layer text-center">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix markersTable_columnsSelect_dateStart">DateStart</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="markersTable_columnsSelect_dateStart text-center">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix markersTable_columnsSelect_dateEnd">DateEnd</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="markersTable_columnsSelect_dateEnd text-center">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix markersTable_columnsSelect_links">Links</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="markersTable_columnsSelect_links text-center">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix markersTable_columnsSelect_latlng">Latlng</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="markersTable_columnsSelect_latlng text-center">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-12 small-centered columns text-center"><a class="small button markersTable_columnsSelect_submit">Submit</a></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Form Edit Map Info-->
+    <div id="formEditMap" class="foundationForm hide">
+      <div class="box-modal">
+        <form data-abide>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_id">ID</span></div>
+            <div class="small-9 columns">
+              <input type="text" required class="formEditMap_id">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_title">Title</span></div>
+            <div class="small-9 columns">
+              <input type="text" required class="formEditMap_title">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_server">Server</span></div>
+            <div class="small-9 columns">
+              <select class="formEditMap_server"></select>
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_layers">Layers</span></div>
+            <div class="small-9 columns">
+              <input type="text" class="formEditMap_layers">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_group">Group</span></div>
+            <div class="small-9 columns">
+              <input type="text" class="formEditMap_group">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_src">Source</span></div>
+            <div class="small-9 columns">
+              <select class="formEditMap_src"></select>
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_crs">CRS</span></div>
+            <div class="small-9 columns">
+              <select class="formEditMap_crs"></select>
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_tilesURL">Tiles URL</span></div>
+            <div class="small-9 columns">
+              <textarea required class="formEditMap_tilesURL"></textarea>
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_maxZoom">maxZoom</span></div>
+            <div class="small-9 columns">
+              <input type="text" required pattern="^1?\d$|^20$" class="formEditMap_maxZoom">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_minZoom">minZoom</span></div>
+            <div class="small-9 columns">
+              <input type="text" required pattern="^1?\d$|^20$" class="formEditMap_minZoom">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMap_startZoom">startZoom</span></div>
+            <div class="small-9 columns">
+              <input type="text" required pattern="^1?\d$|^20$" class="formEditMap_startZoom">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditMap_submit">Submit</a></div>
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditMap_delete">Delete</a></div>
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditMap_cancel">Cancel</a></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Form Edit Stage-->
+    <div id="formEditStage" class="foundationForm hide">
+      <div class="box-modal">
+        <form data-abide>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditStage_id">ID</span></div>
+            <div class="small-9 columns">
+              <input type="text" required class="formEditStage_id">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditStage_title">Title</span></div>
+            <div class="small-9 columns">
+              <input type="text" required class="formEditStage_title">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditStage_group">Group</span></div>
+            <div class="small-9 columns">
+              <input type="text" class="formEditStage_group">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditStage_submit">Submit</a></div>
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditStage_delete">Delete</a></div>
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditStage_cancel">Cancel</a></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Form Edit Stage Controls-->
+    <div id="formEditStage_editMapsControls" class="foundationForm hide">
+      <div class="box-modal">
+        <form data-abide>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix formEditStage_editMapsControls_zoom">Zoom Control</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="formEditStage_editMapsControls_zoom text-center">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix formEditStage_editMapsControls_scale">Scale Control</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="formEditStage_editMapsControls_scale">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix formEditStage_editMapsControls_infoCopyright">Copyright Info</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="formEditStage_editMapsControls_infoCopyright">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-10 columns"><span class="prefix formEditStage_editMapsControls_mapTitle">Title Info</span></div>
+            <div class="small-2 columns">
+              <input type="checkbox" class="formEditStage_editMapsControls_mapTitle">
+            </div>
+          </div>
+        </form>
+        <div class="row collapse">
+          <div class="small-10 columns"><span class="prefix formEditStage_editMapsControls_zoomLevel">ZoomLevel Info</span></div>
+          <div class="small-2 columns">
+            <input type="checkbox" class="formEditStage_editMapsControls_zoomLevel">
+          </div>
+        </div>
+        <div class="row collapse">
+          <div class="small-12 medium-6 columns text-center"><a class="small button formEditStage_submit">Submit</a></div>
+          <div class="small-12 medium-6 columns text-center"><a class="small button formEditStage_cancel">Cancel</a></div>
+        </div>
+      </div>
+    </div>
+    <!-- Form Edit Fast Moving-->
+    <div id="formEditPoint" class="foundationForm hide">
+      <div class="box-modal">
+        <form data-abide>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditPoint_id">ID</span></div>
+            <div class="small-9 columns">
+              <input type="text" required class="formEditPoint_id">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditPoint_title">Title</span></div>
+            <div class="small-9 columns">
+              <input type="text" required class="formEditPoint_title">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditPoint_latlng">LatLng</span></div>
+            <div class="small-9 columns">
+              <input type="text" required pattern="^\d+\.\d+,\d+\.\d+$" class="formEditPoint_latlng">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditPoint_group">Group</span></div>
+            <div class="small-9 columns">
+              <input type="text" class="formEditPoint_group">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditPoint_submit">Submit</a></div>
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditPoint_delete">Delete</a></div>
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditPoint_cancel">Cancel</a></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Form Edit Marker-->
+    <div id="formEditMarker" class="foundationForm hide">
+      <div class="box-modal">
+        <form data-abide>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMarker_id">ID</span></div>
+            <div class="small-9 columns">
+              <input type="text" required readonly class="formEditMarker_id">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMarker_title">Title</span></div>
+            <div class="small-9 columns">
+              <input type="text" required class="formEditMarker_title">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMarker_icon">Icon</span></div>
+            <div class="small-9 columns">
+              <input id="formEditMarker_iconSrc" type="text" class="hide formEditMarker_icon">
+              <div id="formEditMarker_iconsPanel" class="panel"></div>
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMarker_tags">Tags</span></div>
+            <div class="small-9 columns">
+              <!-- String with all tags-->
+              <input id="formEditMarker_tagsSrc" type="text" class="hide formEditMarker_tags">
+              <!-- Panel with tags buttons-->
+              <div id="formEditMarker_tagsPanel" class="panel"></div>
+              <!-- Add tag section-->
+              <div class="row collapse">
+                <div class="small-10 columns">
+                  <input id="formEditMarker_tagsAddInput" type="text" class="formEditMarker_tagsAddInput">
+                </div>
+                <div class="small-2 columns"><a id="formEditMarker_tagsAddButton" class="button tiny postfix nomargin">+</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMarker_layer">Layer</span></div>
+            <div class="small-9 columns">
+              <input type="text" class="formEditMarker_layer">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMarker_description">Description</span></div>
+            <div class="small-9 columns">
+              <div class="row collapse">
+                <div class="small-10 columns">
+                  <textarea id="formEditMarker_description" class="formEditMarker_description"></textarea>
+                </div>
+                <div class="small-2 columns"><a class="button tiny postfix nomargin formEditMarker_descriptionHTMLAddButton"><span class="formEditMarker_descriptionHTMLAddButton">+HTML</span></a></div>
+              </div>
+            </div>
+          </div>
+          <div id="descriptionHTMLRow" class="row collapse hide">
+            <div class="small-3 columns"><span class="prefix formEditMarker_descriptionHTML">Description HTML</span></div>
+            <div class="small-9 columns">
+              <textarea id="formEditMarker_descriptionHTML" class="formEditMarker_descriptionHTML"></textarea>
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMarker_links">Links</span></div>
+            <div class="small-9 columns">
+              <textarea class="formEditMarker_links">                       </textarea>
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMarker_dateStart">Date</span></div>
+            <div class="small-9 columns">
+              <div class="row collapse">
+                <div class="small-8 columns">
+                  <input type="text" class="formEditMarker_dateStart">
+                </div>
+                <div class="small-2 columns"><a class="button tiny postfix nomargin disabled formEditMarker_dateStartAddTime"><span class="formEditMarker_dateStartAddTime">+Time</span></a></div>
+                <div class="small-2 columns"><a class="button tiny postfix nomargin formEditMarker_dateStartAddFinal"><span class="formEditMarker_dateStartAddFinal">+End</span></a></div>
+              </div>
+            </div>
+          </div>
+          <div id="addDateFinalRow" class="row collapse hide">
+            <div class="small-3 columns"><span class="prefix formEditMarker_dateEnd">Date End</span></div>
+            <div class="small-9 columns">
+              <div class="row collapse">
+                <div class="small-8 columns">
+                  <input type="text" class="formEditMarker_dateEnd">
+                </div>
+                <div class="small-2 columns"><a class="button tiny postfix nomargin disabled formEditMarker_dateEndAddTime"><span class="formEditMarker_dateEndAddTime">+Time</span></a></div>
+              </div>
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-3 columns"><span class="prefix formEditMarker_latlng">Latlng</span></div>
+            <div class="small-9 columns">
+              <input type="text" required class="formEditMarker_latlng">
+            </div>
+          </div>
+          <div class="row collapse">
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditMarker_submit">Submit</a></div>
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditMarker_delete">Delete</a></div>
+            <div class="small-12 medium-4 columns text-center"><a class="small button formEditMarker_cancel">Cancel</a></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="disqus_thread" class="hide"></div><script type="text/javascript">
+       /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+       var disqus_shortname = 'kartofan'; // required: replace example with your forum shortname
+       /* * * DON'T EDIT BELOW THIS LINE * * */
+       (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+       })();
+    </script>
+    <!--<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>-->
+    <!--<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
+    <!-- Bottom JS-->
+    <script src="js_vendor/foundation.min.js"></script>
+    <script src="js/jquery.noty.kartofan.js"></script>
+    <script src="js/starik.kartofan.fn.js"></script>
+    <script src="js/starik.kartofan.leaflet.js"></script>
+    <script src="js/starik.kartofan.options.js"></script>
+    <script src="js/starik.kartofan.stages.js"></script>
+    <script src="js/starik.kartofan.forms.js"></script>
+    <script src="js/starik.kartofan.tour.js"></script>
+    <script src="js/starik.kartofan.gps.js"></script>
+    <script src="js/starik.kartofan.markers.js"></script>
+    <script src="js/starik.kartofan.main.js"></script>
+    <!--script(src="bottom.js")--><!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter22770301 = new Ya.Metrika({id:22770301, webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true, trackHash:true}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/22770301" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-38067250-2', 'kissr.com');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
